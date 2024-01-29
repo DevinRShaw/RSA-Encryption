@@ -1,66 +1,46 @@
 #include <iostream>
 #include <cmath>
+#include <string>
+#include <sstream>
+#include <vector> 
 
-// Generate a random prime number
-int generatePrime() {
-    // TODO: Implement prime number generation logic
-    // Return a random prime number
-}
+std::vector<std::string> splitString(const std::string& input) {
+    std::stringstream ss(input);
+    std::string token;
+    std::vector<std::string> tokens;
 
-// Calculate the greatest common divisor (GCD) of two numbers
-int gcd(int a, int b) {
-    // TODO: Implement GCD calculation logic
-    // Return the GCD of a and b
-}
-
-// Generate the public and private keys
-void generateKeys(int& publicKey, int& privateKey, int& modulus) {
-    int p = generatePrime();
-    int q = generatePrime();
-    modulus = p * q;
-    int phi = (p - 1) * (q - 1);
-
-    publicKey = 2; // Start with a default public key
-    while (publicKey < phi) {
-        if (gcd(publicKey, phi) == 1) {
-            break;
-        }
-        publicKey++;
+    while (std::getline(ss, token, ' ')) { // Split by space
+        tokens.push_back(token);
     }
 
-    // Calculate the private key
-    int k = 1;
-    while (true) {
-        int temp = (k * phi + 1) / publicKey;
-        if ((k * phi + 1) == (temp * publicKey)) {
-            privateKey = temp;
-            break;
-        }
-        k++;
-    }
+    return tokens;
 }
 
-// Encrypt a message using the public key
-int encrypt(int message, int publicKey, int modulus) {
-    return std::fmod(std::pow(message, publicKey), modulus);
-}
 
-// Decrypt a message using the private key
-int decrypt(int encryptedMessage, int privateKey, int modulus) {
-    return std::fmod(std::pow(encryptedMessage, privateKey), modulus);
-}
 
 int main() {
-    int publicKey, privateKey, modulus;
-    generateKeys(publicKey, privateKey, modulus);
+    
+    std::string input; 
+    std::getline(std::cin, input); // Use getline to read a whole line, not just one word
 
-    int message = 42;
-    int encryptedMessage = encrypt(message, publicKey, modulus);
-    int decryptedMessage = decrypt(encryptedMessage, privateKey, modulus);
 
-    std::cout << "Original message: " << message << std::endl;
-    std::cout << "Encrypted message: " << encryptedMessage << std::endl;
-    std::cout << "Decrypted message: " << decryptedMessage << std::endl;
+    std::vector<std::string> tokens = splitString(input);
+
+    
+
+    std::vector<int> numbers;
+    // Print out the tokens as integers
+    for (const auto& token : tokens) {
+        int number = std::stoi(token);
+        numbers.push_back(number);
+    }
+
+    int e = numbers[0];
+    int n = numbers[1];
+
+
+
+
 
     return 0;
 }
