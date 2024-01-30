@@ -328,7 +328,7 @@ int main() {
 
     std::cout << std::endl; 
 
-    std::cout << messageString << std::endl;
+    std::cout << messageString;
 
     
 
