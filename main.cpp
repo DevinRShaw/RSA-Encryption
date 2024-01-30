@@ -299,7 +299,7 @@ int main() {
 
     //check if the public key is valid
     if (!isPublicKeyValid(e, pqTuple)) {
-        std::cout << "Public key is not valid!" << std::endl;
+        std::cout << "Public key is not valid!";
         return 0;
     }
 
@@ -325,7 +325,7 @@ int main() {
     for(auto& i : messageInts){
         std::cout << i << " ";
     }
-    
+
     std::cout << std::endl; 
 
     std::cout << messageString << std::endl;
