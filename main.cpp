@@ -320,7 +320,7 @@ int main() {
 
 
 
-    std::cout << "p = " << p << ", q = " << q << " toitent(n) = " << tN << ", d = " << inverseD << std::endl;
+    std::cout << p  << q << tN << inverseD << std::endl;
 
     for(auto& i : messageInts){
         std::cout << i << " ";
@@ -332,7 +332,7 @@ int main() {
 
     
 
-
+    
     
 
     return 0;
