@@ -130,10 +130,10 @@ bool isPublicKeyValid(int e, std::vector<int> pqTuple) {
         return false;
     }
 
-    // Check that p*q is greater than 255
+    /* Check that p*q is greater than 255
     if (p * q <= 255) {
         return false;
-    }
+    }*/
 
     //totient(n) = (p-1)*(q-1)
     int tN = (q - 1)*(q - 1);
