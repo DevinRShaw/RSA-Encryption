@@ -87,7 +87,7 @@ bool isPrime(int num) {
 
 
 
-//finds p and q values
+//finds p and q values of n = pq
 std::vector<int> findPrimeFactors(int n) {
     int p = 0, q = 0;
 
@@ -143,13 +143,13 @@ bool isPublicKeyValid(int e, std::vector<int> pqTuple) {
 }
 
 
-int decryptChar(int encryptedChar, int d, int n) {
-    int decryptedChar = 0;
+int decryptNum(int encryptedChar, int d, int n) {
+    int decryptedNum = 0;
 
-    //decryptedChar = encryptedChar^d mod n
-    decryptedChar = static_cast<int>(pow(encryptedChar, d)) % n;
+    //decryptedNum = encryptedChar^d mod n
+    decryptedNum = static_cast<int>(pow(encryptedChar, d)) % n;
 
-    return decryptedChar;
+    return decryptedNum;
 }
 
 
