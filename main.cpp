@@ -144,16 +144,133 @@ bool isPublicKeyValid(int e, std::vector<int> pqTuple) {
 
 
 int decryptNum(int encryptedChar, int d, int n) {
-    int decryptedNum = 0;
+    int decryptedNum = 1;
 
-    //decryptedNum = encryptedChar^d mod n
-    decryptedNum = static_cast<int>(pow(encryptedChar, d)) % n;
+    // Perform modular exponentiation: decryptedNum = (encryptedChar^d) % n
+    for (int i = 0; i < d; i++) {
+        decryptedNum = (decryptedNum * encryptedChar) % n;
+    }
 
     return decryptedNum;
+}
+std::vector<int> decryptMessageInts(std::vector<int> encryptedMessage, int d, int n) {
+    std::vector<int> messageString;
+
+    for (auto& encryptedChar : encryptedMessage) {
+        int decryptedInt = decryptNum(encryptedChar, d, n);
+        messageString.push_back(decryptedInt);
+    }
+
+    return messageString;
 }
 
 
 
+std::string messageToString(std::vector<int> messageString) {
+    std::string decryptedString;
+
+    for (auto& decryptedChar : messageString) {
+        switch (decryptedChar) {
+            case 7:
+                decryptedString += 'A';
+                break;
+            case 8:
+                decryptedString += 'B';
+                break;
+            case 9:
+                decryptedString += 'C';
+                break;
+            case 10:
+                decryptedString += 'D';
+                break;
+            case 11:
+                decryptedString += 'E';
+                break;
+            case 12:
+                decryptedString += 'F';
+                break;
+            case 13:
+                decryptedString += 'G';
+                break;
+            case 14:
+                decryptedString += 'H';
+                break;
+            case 15:
+                decryptedString += 'I';
+                break;
+            case 16:
+                decryptedString += 'J';
+                break;
+            case 17:
+                decryptedString += 'K';
+                break;
+            case 18:
+                decryptedString += 'L';
+                break;
+            case 19:
+                decryptedString += 'M';
+                break;
+            case 20:
+                decryptedString += 'N';
+                break;
+            case 21:
+                decryptedString += 'O';
+                break;
+            case 22:
+                decryptedString += 'P';
+                break;
+            case 23:
+                decryptedString += 'Q';
+                break;
+            case 24:
+                decryptedString += 'R';
+                break;
+            case 25:
+                decryptedString += 'S';
+                break;
+            case 26:
+                decryptedString += 'T';
+                break;
+            case 27:
+                decryptedString += 'U';
+                break;
+            case 28:
+                decryptedString += 'V';
+                break;
+            case 29:
+                decryptedString += 'W';
+                break;
+            case 30:
+                decryptedString += 'X';
+                break;
+            case 31:
+                decryptedString += 'Y';
+                break;
+            case 32:
+                decryptedString += 'Z';
+                break;
+            case 33:
+                decryptedString += ' ';
+                break;
+            case 34:   
+                decryptedString += '\"';
+                break;
+            case 35:
+                decryptedString += ',';
+                break;
+            case 36:
+                decryptedString += '.';
+                break;
+            case 37:
+                decryptedString += '\'';
+                break;
+            default:
+                break;
+        }
+    }
+
+    return decryptedString;
+}
 
 
 
@@ -168,6 +285,7 @@ int main() {
     int e = publicKey[0];
     int n = publicKey[1];
 
+    //find p and q values of n = pq 
     std::vector<int> pqTuple = findPrimeFactors(n);
     int p = pqTuple[0];
     int q = pqTuple[1];
@@ -178,6 +296,7 @@ int main() {
         std::cout << "Public key is not valid!" << std::endl;
         return 0;
     }
+
 
     // Find the inverse of e mod((p-1)*(q-1))
     //inverse = value * e such that (value * e) % ((p-1)*(q-1)) == 1
@@ -190,7 +309,21 @@ int main() {
         }
     }
 
-    std::cout << "p = " << p << ", q = " << q << "toitent(n), " << tN << ", d = " << inverseD << std::endl;
+    std::vector<int> messageInts = decryptMessageInts(encryptedMessage, inverseD, n);
+    std::string messageString = messageToString(messageInts);
+
+
+
+    std::cout << "p = " << p << ", q = " << q << " toitent(n) = " << tN << ", d = " << inverseD << std::endl;
+
+    for(auto& i : messageInts){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl; 
+
+    std::cout << messageString << std::endl;
+
+    
 
 
     
