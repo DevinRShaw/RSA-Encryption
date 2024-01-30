@@ -72,6 +72,9 @@ std::vector<std::vector<int>> processInput() {
     return result;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
 //To check primality of found p 
 bool isPrime(int num) {
     if (num <= 1) {
@@ -132,6 +135,7 @@ bool isPublicKeyValid(int e, std::vector<int> pqTuple) {
         return false;
     }
 
+    //totient(n) = (p-1)*(q-1)
     int tN = (q - 1)*(q - 1);
     gcd = std::gcd(e,tN);
     if (gcd != 1) {
@@ -142,6 +146,8 @@ bool isPublicKeyValid(int e, std::vector<int> pqTuple) {
     return true;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 int decryptNum(int encryptedChar, int d, int n) {
     int decryptedNum = 1;
@@ -319,6 +325,7 @@ int main() {
     for(auto& i : messageInts){
         std::cout << i << " ";
     }
+    
     std::cout << std::endl; 
 
     std::cout << messageString << std::endl;
